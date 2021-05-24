@@ -1,0 +1,45 @@
+drive01 6 15.5 61499
+
+dive01 - record name - jméno záznamu - povinné
+
+6 - number of signals - počet signálu na tomto záznamu
+
+15.5 - sampling -  vzorokování (p. vzorku za s (Hz))
+
+61499 - number of samples per signal - počet vzorku na signál
+
+
+drive01.dat 16x128 10000 16 0 68 11155 0 EMG
+
+drive01.dat - název souboru
+
+16 - format - označení použitého formátu (16bit small endian na jeden záznam v tomto případě např.)
+
+x128 - samples per frame- velikost okna (? pro nás asi nedůležitý, přesto by bylo vhodné i tak to rozparsovat)
+
+10000 - ADC gain -  rozdíl skutečných hodnot po zaznamenání rozdílu 1 jednotky přístrojem
+
+16 - ADC resolution - velikost ADC prevodniku . Urcuje velikost nejmensi zaznamenane zmeny (pro tento pripad napr. 1/65535 (max hodnota 16bit)).
+	S nejvetsi pravdebodobnosti asi bude stejna jako pouzity format 
+
+0 -  ADC zero - základní y hodnota protinající osu x
+
+68 - initial value - hodnota 0 vzorku
+
+11155 - checksum - kontrolní součet
+
+0 - block size - velikost bloku pro checksum (obvykle nula, pro nás není teď důležité, ale přesto je dobré to rozparsovat)
+
+EMG - description - popis signálu
+
+
+do mapování je potřeba přidat na jakým pořadí se vybraný signál nachází 
+(obvykle řádek -1(první řádek je pro záznam ne pro signál) ale soubor může obsahovat poznámky, takže je na to potřeba brát ohled).
+
+
+Pokud soubor obsahuje n signálů o stejné vzorkovací frekvenci, tak každá skupina n záznamů obsahuje právě jednu hodnotu na signál (vždy v určeném pořadí).
+
+
+format 16 (v tomto případě)
+každá hodnota je ve dvojkovém doplňku (viz. https://en.wikipedia.org/wiki/Two%27s_complement ) označující amplitudu.
+čísla jenž nepoužívají všechny byty jsou znaménkově prodloužena (viz. https://chortle.ccsu.edu/AssemblyTutorial/zAppendixH/appH_12.html )
