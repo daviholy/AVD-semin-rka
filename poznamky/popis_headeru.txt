@@ -4,7 +4,7 @@ dive01 - record name - jméno záznamu - povinné
 
 6 - number of signals - počet signálu na tomto záznamu
 
-15.5 - sampling -  vzorokování (p. vzorku za s (Hz))
+15.5 - sampling -  základní vzorokování (p. vzorku za s (Hz) na signál)
 
 61499 - number of samples per signal - počet vzorku na signál
 
@@ -15,7 +15,7 @@ drive01.dat - název souboru
 
 16 - format - označení použitého formátu (16bit small endian na jeden záznam v tomto případě např.)
 
-x128 - samples per frame- velikost okna (? pro nás asi nedůležitý, přesto by bylo vhodné i tak to rozparsovat)
+x128 - samples per frame- počet vzorků okna viz. popis níže - defaultně 1
 
 10000 - ADC gain -  rozdíl skutečných hodnot po zaznamenání rozdílu 1 jednotky přístrojem
 
@@ -37,9 +37,19 @@ do mapování je potřeba přidat na jakým pořadí se vybraný signál nacház
 (obvykle řádek -1(první řádek je pro záznam ne pro signál) ale soubor může obsahovat poznámky, takže je na to potřeba brát ohled).
 
 
-Pokud soubor obsahuje n signálů o stejné vzorkovací frekvenci, tak každá skupina n záznamů obsahuje právě jednu hodnotu na signál (vždy v určeném pořadí).
-
 
 format 16 (v tomto případě)
 každá hodnota je ve dvojkovém doplňku (viz. https://en.wikipedia.org/wiki/Two%27s_complement ) označující amplitudu.
 čísla jenž nepoužívají všechny byty jsou znaménkově prodloužena (viz. https://chortle.ccsu.edu/AssemblyTutorial/zAppendixH/appH_12.html )
+
+frame
+Pokud nemají signály stejné vzorkování, tak jsou určený okna. Každé okno obsahuje nejméně 1 vzorek na každý signál a jeho velikost je určená součtem hodnot počtů samples per frame na jednotlivých signálech.
+jednotlivé hodnoty signálu jsou zaznamenány sekvenčně v pořadí v jakém jsou popsány. tím pádem vzorkovací frekvence výsledného signálu je základní frekvence * samples per frame.
+Př
+pro data z drive01 můžeme vyčíst hodnoty samples per frame jednotlivých signálů jako (32,128,2,2,1,1).
+Což znamená že delká okna je 166 a hodnoty jsou přiřazeny následovně: 1-32 pro první signál, 33-160 pro druhý signál, 161-162 pro třetí signál, 163-164 pro čtvrtý signál, 165 pro patý signál, 166 pro šestý signál.
+
+co je navíc potřeba zjistit
+-velikost okna
+-offset okna - počet prvních n hodnot, které nepatří k hledanému signálu ( např. pro drive01 je to hodnota 32, pro hledaný signál EMG)
+  
