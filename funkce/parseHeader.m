@@ -1,4 +1,5 @@
 function map = parseHeader(filePath,signalDesc)
+%parse the infromations of specified signal from header file
 file = fopen(filePath,'r','n','UTF-8');
 recordHead= fgetl(file);
 recordHead= split(recordHead, " ");
