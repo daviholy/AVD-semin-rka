@@ -33,10 +33,6 @@ x128 - samples per frame- počet vzorků okna viz. popis níže - defaultně 1
 EMG - description - popis signálu
 
 
-do mapování je potřeba přidat na jakým pořadí se vybraný signál nachází 
-(obvykle řádek -1(první řádek je pro záznam ne pro signál) ale soubor může obsahovat poznámky, takže je na to potřeba brát ohled).
-
-
 
 format 16 (v tomto případě)
 každá hodnota je ve dvojkovém doplňku (viz. https://en.wikipedia.org/wiki/Two%27s_complement ) označující amplitudu.
