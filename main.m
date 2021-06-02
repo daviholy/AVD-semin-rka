@@ -2,6 +2,7 @@
 cd funkce
 h_read =@read;
 h_parseHeader = @parseHeader;
+iemg_f = @iemg;
 cd ..
 %
 map = h_parseHeader("data/drive06.hea","EMG");
