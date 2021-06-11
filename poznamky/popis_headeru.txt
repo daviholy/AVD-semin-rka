@@ -49,3 +49,6 @@ co je navíc potřeba zjistit
 -velikost okna
 -offset okna - počet prvních n hodnot, které nepatří k hledanému signálu ( např. pro drive01 je to hodnota 32, pro hledaný signál EMG)
   
+zvolena delka okna
+32 - delka
+1/62 - casovy interval
