@@ -51,11 +51,11 @@ co je navíc potřeba zjistit
   
 zvolena delka okna
 pro prvni soubor s 1984 Hz
-256 - delka
+512 - delka
 1/1984 - casovy interval mezi daty
-1/7,75 - casovy interval po zintegrovani
+1/3,875 - casovy interval po zintegrovani
 
 pro zbytek
-2 - delka
+4 - delka
 1/15,5 - casovy interval mezi daty
-1/7,75 - casovy interval po zintergrovani
+1/3,875 - casovy interval po zintergrovani
