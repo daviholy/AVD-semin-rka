@@ -50,5 +50,12 @@ co je navíc potřeba zjistit
 -offset okna - počet prvních n hodnot, které nepatří k hledanému signálu ( např. pro drive01 je to hodnota 32, pro hledaný signál EMG)
   
 zvolena delka okna
-32 - delka
-1/62 - casovy interval
+pro prvni soubor s 1984 Hz
+256 - delka
+1/1984 - casovy interval mezi daty
+1/7,75 - casovy interval po zintegrovani
+
+pro zbytek
+2 - delka
+1/15,5 - casovy interval mezi daty
+1/7,75 - casovy interval po zintergrovani
