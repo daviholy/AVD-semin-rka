@@ -1,20 +1,47 @@
 addpath('./funkce');
 %-----------------------------------------------
-%2 chosen signals
-%1.signal
-map = parseHeader("data/drive07.hea","EMG");
-data = read("data/drive07.dat",map);
+%Showcase of raw data and itegrated data of signal 1
+map = parseHeader("data/drive01.hea","EMG");
+data = read("data/drive01.dat",map);
 time = 1/map('frequency'):1/map('frequency'):size(data,2) / map('frequency');
 iemg_res = iemg(data,time); % iemg value from data
-iemg_windowed = window(data,time,4); % windowed IEMG
-fig1=figure()
-plot(iemg_windowed);
-title('Práce signálu 7', 'FontSize', 20);
+iemg_windowed = window(data,time,256); % windowed IEMG
+%--------
+%1.signal - raw data
+fig1r=figure()
+plot(data);
+title('Raw data signálu 1', 'FontSize', 20);
 xlabel('čas', 'FontSize', 20)
 ylabel('práce', 'FontSize', 20)
-xlim([0.36e4 0.44e4])
-% saveas(fig1,'plot_graph1.png')
-% savefig('plot_graph1_fig.fig')
+saveas(fig1r,'plot_graph1r.png')
+savefig('plot_graph1r_fig.fig')
+%--------
+%1.signal - integrated data
+fig1i=figure()
+plot(iemg_windowed);
+title('Integrovaný signál 1', 'FontSize', 20);
+xlabel('čas', 'FontSize', 20)
+ylabel('práce', 'FontSize', 20)
+saveas(fig1i,'plot_graph1i.png')
+savefig('plot_graph1i_fig.fig')
+%-----------------------------------------------
+%2 chosen signals
+%--------
+%1.signal
+map = parseHeader("data/drive01.hea","EMG");
+data = read("data/drive01.dat",map);
+time = 1/map('frequency'):1/map('frequency'):size(data,2) / map('frequency');
+iemg_res = iemg(data,time); % iemg value from data
+iemg_windowed = window(data,time,256); % windowed IEMG
+fig1=figure()
+plot(iemg_windowed);
+title('Práce signálu 1', 'FontSize', 20);
+xlabel('čas', 'FontSize', 20)
+ylabel('práce', 'FontSize', 20)
+xlim([1.53e4 1.55e4])
+saveas(fig1,'plot_graph1.png')
+savefig('plot_graph1_fig.fig')
+%--------
 %2.signal
 map = parseHeader("data/drive08.hea","EMG");
 data = read("data/drive08.dat",map);
@@ -27,8 +54,8 @@ title('Práce signálu 8', 'FontSize', 20);
 xlabel('čas', 'FontSize', 20)
 ylabel('práce', 'FontSize', 20)
 xlim([0.36e4 0.4e4])
-% saveas(fig2,'plot_graph2.png')
-% savefig('plot_graph2_fig.fig')
+saveas(fig2,'plot_graph2.png')
+savefig('plot_graph2_fig.fig')
 %-----------------------------------------------
 
 %connecting graph 17a + 17b
@@ -79,8 +106,8 @@ scatter(all_times,all_iemg_windowed,25,'filled');
 title('Celková práce', 'FontSize', 20);
 xlabel('čas', 'FontSize', 20)
 ylabel('práce', 'FontSize', 20)
-% saveas(fig3,'plot_prace.png')
-% savefig('plot_prace_fig.fig')
+saveas(fig3,'plot_prace.png')
+savefig('plot_prace_fig.fig')
 
 
 
