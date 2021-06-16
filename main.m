@@ -6,43 +6,57 @@ addpath('./funkce');
 map = parseHeader("data/drive01.hea","EMG");
 data = read("data/drive01.dat",map);
 time = 1/map('frequency'):1/map('frequency'):size(data,2) / map('frequency');
-iemg_res = iemg(data,time); % iemg value from data
-iemg_windowed = window(data,time,256); % windowed IEMG
-fig1=figure()
-plot(iemg_windowed);
-title('Integrovan√Ω sign√°l 1', 'FontSize', 20);
-xlabel('ƒças', 'FontSize', 20)
-ylabel('pr√°ce', 'FontSize', 20)
-xlim([1.53e4 1.55e4])
-%saveas(fig1,'plot_graph1.png')
-%savefig('plot_graph1_fig.fig')
+iemg_windowed = window(data,time,992); % windowed IEMG
+fig1=figure();
+plot(1/2:1/2:size(iemg_windowed,1)/2,iemg_windowed);
+title('Integrovan˝ sign·l', 'FontSize', 20);
+xlabel('Ëas', 'FontSize', 20)
+ylabel('pr·ce', 'FontSize', 20)
+xlim([1000 1060])
+if(save)
+saveas(fig1,'grafy/plot_graph1.png')
+savefig('grafy/plot_graph1.fig')
+end
 %--------
 %1.signal - raw data
-fig1r=figure()
-plot(data)
-xlim([1.53e4 1.55e4])
-title('Raw data sign√°lu 1', 'FontSize', 20);
-xlabel('ƒças', 'FontSize', 20)
-ylabel('pr√°ce', 'FontSize', 20)
-saveas(fig1r,'plot_graph1r.png')
-savefig('plot_graph1r_fig.fig')
+fig1r=figure();
+plot(time, data);
+xlim([1000 1060])
+title('neupraven· data sign·lu 1', 'FontSize', 20);
+xlabel('Ëas (sekundy)', 'FontSize', 20)
+ylabel('pr·ce', 'FontSize', 20)
+if(save)
+saveas(fig1r,'grafy/plot_graph1r.png')
+savefig('grafy/plot_graph1r.fig')
+end
 %--------
-%2.signal
+%2.signal - integrated
 map = parseHeader("data/drive08.hea","EMG");
 data = read("data/drive08.dat",map);
 time = 1/map('frequency'):1/map('frequency'):size(data,2) / map('frequency');
 iemg_res = iemg(data,time); % iemg value from data
-iemg_windowed = window(data,time,4); % windowed IEMG
-fig2=figure()
-plot(iemg_windowed);
-title('Pr√°ce sign√°lu 8', 'FontSize', 20);
-xlabel('ƒças', 'FontSize', 20)
-ylabel('pr√°ce', 'FontSize', 20)
-xlim([0.36e4 0.4e4])
-%saveas(fig2,'plot_graph2.png')
-%savefig('plot_graph2_fig.fig')
+iemg_windowed = window(data,time,31); % windowed IEMG
+fig2=figure();
+plot(1/1.9375:1/1.9375:size(iemg_windowed,1)/1.9375,iemg_windowed);
+title('Pr·ce sign·lu 8', 'FontSize', 20);
+xlabel('Ëas (sekundy)', 'FontSize', 20)
+ylabel('pr·ce', 'FontSize', 20)
+xlim([550 670])
+saveas(fig2,'grafy/plot_graph2.png')
+savefig('grafy/plot_graph2.fig')
 %-----------------------------------------------
-
+%2.signal - raw
+fig2r=figure();
+plot(time, data);
+xlim([550 670])
+title('neupraven· data sign·lu 1', 'FontSize', 20);
+xlabel('Ëas (sekundy)', 'FontSize', 20)
+ylabel('pr·ce', 'FontSize', 20)
+if(save)
+saveas(fig2r,'grafy/plot_graph2r.png')
+savefig('grafy/plot_graph2r.fig')
+end
+%-----------------------------------------------
 %connecting graph 17a + 17b
 map17a = parseHeader("data/drive17a.hea","EMG");
 data17a = read("data/drive17a.dat",map17a);
@@ -68,9 +82,9 @@ cesty_dat=["data/drive01.dat" "data/drive05.dat" "data/drive06.dat" "data/drive0
            "data/drive10.dat" "data/drive11.dat" "data/drive12.dat" "data/drive13.dat" "data/drive14.dat" "data/drive15.dat" ...
            "data/drive16.dat"];
        
-window_sizes=[512,4,4,4,4,...
-                4,4,4,4,4,...
-                4,4,4];
+window_sizes=[992,8,8,8,8,...
+                8,8,8,8,8,...
+                8,8,8];
 
 all_iemg_windowed=zeros(1,length(cesty_map+1));
 all_iemg_windowed(1)=iemg_res17;
@@ -86,13 +100,15 @@ for r = 1:length(cesty_map)
         all_times(r+1)=time(end);
 end
 
-fig3=figure()
+fig3=figure();
 scatter(all_times,all_iemg_windowed,25,'filled');
-title('Celkov√° pr√°ce', 'FontSize', 20);
-xlabel('ƒças', 'FontSize', 20)
-ylabel('pr√°ce', 'FontSize', 20)
-%saveas(fig3,'plot_prace.png')
-%savefig('plot_prace_fig.fig')
+title('Celkov· vykonan· pr·ce', 'FontSize', 20);
+xlabel('Ëas (sekundy)', 'FontSize', 20)
+ylabel('celkov· pr·ce', 'FontSize', 20)
+if(save)
+saveas(fig3,'grafy/plot_prace.png')
+savefig('grafy/plot_prace.fig')
+end
 
 
 
