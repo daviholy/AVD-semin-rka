@@ -39,8 +39,8 @@ title('Práce signálu 8', 'FontSize', 20);
 xlabel('čas', 'FontSize', 20)
 ylabel('práce', 'FontSize', 20)
 xlim([0.36e4 0.4e4])
-%saveas(fig2,'plot_graph2.png')
-%savefig('plot_graph2_fig.fig')
+%saveas(fig2,'plot_graph8.png')
+%savefig('plot_graph8_fig.fig')
 %-----------------------------------------------
 
 %connecting graph 17a + 17b
